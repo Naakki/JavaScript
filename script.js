@@ -1,6 +1,5 @@
 // Snake
 // body {overflow: hidden;} -- css, to cancel scroll 
-// finish & upgrade delayCount()
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
@@ -9,8 +8,7 @@ const box = 20;
 canvas.width = 400;
 canvas.height = 400;
 
-let gameTimer;
-let gameOverTimer;
+let gameTimer, count, gameOverTimer;
 let isGameStarted = true;
 let direction = 'up';
 let score = 0;
@@ -138,6 +136,7 @@ function gameOver() {
 }
 
 function delayCount() {
+	let c = 3;
 	let grad = ctx.createLinearGradient(50, 200, canvas.width, 250);
 	grad.addColorStop(0, 'magenta');
 	grad.addColorStop(1, 'blue');
@@ -145,25 +144,20 @@ function delayCount() {
 	ctx.fillStyle = grad;
 	ctx.font = '50px Georgia';
 
-	setTimeout(function () {
-		console.log(3);
+	count = setInterval(function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.fillText('3', canvas.width / 2, canvas.height / 2);
-	}, 1000);
-	setTimeout(function () {
-		console.log(2);
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.fillText('2', canvas.width / 2, canvas.height / 2);
-	}, 2000);
-	setTimeout(function () {
-		console.log(1);
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.fillText('1', canvas.width / 2, canvas.height / 2);
-	}, 3000);
-	setTimeout(function () {
-		console.log('go');
-		gameTimer = setInterval(drawGame, 200);	
-	}, 4000);
+		ctx.fillText(c, canvas.width / 2, canvas.height / 2);
+		c--;
+		if (c == -1) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillText('Go', canvas.width / 2 - box, canvas.height / 2);
+			clearInterval(count);
+			setTimeout(function(){
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				gameTimer = setInterval(drawGame, 200);
+			}, 1000);
+		}
+	} ,1000);
 }
 
 document.addEventListener('keydown', function(e) {
@@ -200,7 +194,7 @@ document.addEventListener('keydown', function(e) {
 					y: (canvas.height / box / 2 + 2) * box
 				}
 			];
-			gameTimer = setInterval(drawGame, 200);
+			delayCount();
 		}
 	} else if (e.keyCode == 80) {
 		if (isGameStarted) {
@@ -212,7 +206,7 @@ document.addEventListener('keydown', function(e) {
 			ctx.fillText('PAUSE', 120, canvas.height / 2);
 		} else {
 			isGameStarted = true;
-			gameTimer = setInterval(drawGame, 200);
+			delayCount();
 		}
 	}
 });
