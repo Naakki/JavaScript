@@ -1,8 +1,10 @@
 // Snake
-// body {overflow: hidden;} -- css, to cancel scroll 
+ 
+// add score lider table
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
+const body = document.getElementById('body');
 const box = 20;
 
 canvas.width = 400;
@@ -133,9 +135,36 @@ function gameOver() {
 
 	ctx.font = '50px Georgia';
 	ctx.fillText('Game Over', 80, canvas.height / 2);
+
+	setTimeout(function() {
+		direction = 'up';
+		score = 0;
+		food = {
+			x: Math.floor(Math.random() * canvas.width / box) * box,
+			y: Math.floor(Math.random() * canvas.height / box) * box
+		};
+
+		snake = [
+			{
+				x: canvas.width / box / 2 * box,
+				y: canvas.height / box / 2 * box
+			},
+			{
+				x: canvas.width / box / 2 * box,
+				y: (canvas.height / box / 2 + 1) * box
+			},
+			{
+				x: canvas.width / box / 2 * box,
+				y: (canvas.height / box / 2 + 2) * box
+			}
+		];
+	}, 1000);
 }
 
 function delayCount() {
+	clearInterval(gameOverTimer);
+
+	body.style.overflow = 'hidden';
 	let c = 3;
 	let grad = ctx.createLinearGradient(50, 200, canvas.width, 250);
 	grad.addColorStop(0, 'magenta');
@@ -204,6 +233,8 @@ document.addEventListener('keydown', function(e) {
 			ctx.fillStyle = '#009933';
 			ctx.font = '50px Georgia';
 			ctx.fillText('PAUSE', 120, canvas.height / 2);
+
+			body.style.overflow = 'visible';
 		} else {
 			isGameStarted = true;
 			delayCount();

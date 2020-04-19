@@ -1,5 +1,9 @@
 /* Snake */
 
+#body {
+	overflow: visible;
+}
+
 .snakeContainer {
 	width: 60%;
 	min-width: 600px;
