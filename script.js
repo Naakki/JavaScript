@@ -1,13 +1,15 @@
 // Snake
 // body {overflow: hidden;} -- css, to cancel scroll 
+// finish & upgrade delayCount()
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
-const box = 40;
+const box = 20;
 
 canvas.width = 400;
 canvas.height = 400;
 
+let gameTimer;
 let gameOverTimer;
 let isGameStarted = true;
 let direction = 'up';
@@ -135,6 +137,35 @@ function gameOver() {
 	ctx.fillText('Game Over', 80, canvas.height / 2);
 }
 
+function delayCount() {
+	let grad = ctx.createLinearGradient(50, 200, canvas.width, 250);
+	grad.addColorStop(0, 'magenta');
+	grad.addColorStop(1, 'blue');
+
+	ctx.fillStyle = grad;
+	ctx.font = '50px Georgia';
+
+	setTimeout(function () {
+		console.log(3);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillText('3', canvas.width / 2, canvas.height / 2);
+	}, 1000);
+	setTimeout(function () {
+		console.log(2);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillText('2', canvas.width / 2, canvas.height / 2);
+	}, 2000);
+	setTimeout(function () {
+		console.log(1);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillText('1', canvas.width / 2, canvas.height / 2);
+	}, 3000);
+	setTimeout(function () {
+		console.log('go');
+		gameTimer = setInterval(drawGame, 200);	
+	}, 4000);
+}
+
 document.addEventListener('keydown', function(e) {
 	if ((e.keyCode == 37 || e.keyCode == 65) && direction != 'right') {
 		direction = 'left';
@@ -186,7 +217,7 @@ document.addEventListener('keydown', function(e) {
 	}
 });
 
-let gameTimer = setInterval(drawGame, 200);
+delayCount();
 
 // Animation
 
