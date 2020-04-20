@@ -6,29 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="body">
-<!-- Color clock -->
 
-<div id="clock" class="clock">
-	<p id="time" class="time">##.##.##</p>
-	<p id="colorCode" class="colorCode">#######</p>
-</div>
-
-<hr>
-<hr>
-
-<!-- Snake -->
-
-<div class="snakeContainer">
-	<canvas id="game" class="snake-field">
-		Update your browser
-	</canvas>
-	<div class="snake-score">
-		<span id="scores">Scores:</span>
-	</div>
-</div>
-
-<hr>
-<hr>
 <!-- Animation -->
 <!-- 
 <div class="container">
@@ -39,32 +17,55 @@
 <hr>
 <hr>
  -->
-<!-- Modals -->
 
-<button id="myBtn">Open Modal</button>
-<div id="myModal" class="modal">
-	<div class="modal-content">
-		<span class="close">&times;</span>
-		<p>Modal window</p>
-	</div>
-</div>
-
-<hr>
-<hr>
 <!-- Tabs -->
+<div name="tabs" id="listContent" class="listContent">
+	<div id="tabs">
+		<div class="tab whiteborder">Color clock</div>
+		<div class="tab">Snake game</div>
+		<div class="tab">Modal window</div>
+		<div class="tabContent show">
+			<!-- Color clock -->
 
-<div id="tabs">
-	<div class="tab whiteborder">Tab 1</div>
-	<div class="tab">Tab 2</div>
-	<div class="tab">Tab 3</div>
-	<div class="tabContent show">1 Content</div>
-	<div class="tabContent hide">2 Content</div>
-	<div class="tabContent hide">3 Content</div>
+			<div name="colorClock" id="listContent" class="listContent">
+				<div id="clock" class="clock">
+					<p id="time" class="time">##.##.##</p>
+					<p id="colorCode" class="colorCode">#######</p>
+				</div>
+			</div>
+		</div>
+		<div class="tabContent hide">
+			<!-- Snake -->
+			
+			<div name="snake" id="listContent" class="listContent">
+				<div class="snakeContainer">
+					<canvas id="game" class="snake-field">
+						Update your browser
+					</canvas>
+					<div class="snake-score">
+						<span id="scores">Scores:</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tabContent hide">
+			<!-- Modals -->
+			
+			<div name="modal" id="listContent" class="listContent">
+				<button id="myBtn">Open Modal</button>
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<p>Modal window</p>
+					</div>
+				</div>
+			</div></div>
+	</div>
 </div>
 
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="snake.js"></script>
-<script type="text/javascript" src="animationLoading.js"></script>
 <script type="text/javascript" src="colorClock.js"></script>
+<!-- <script type="text/javascript" src="animationLoading.js"></script> -->
 </body>
 </html>
